@@ -1,0 +1,73 @@
+﻿@model UserForLoginDto
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/CardStyle.css" rel="stylesheet" />
+
+<div class="card">
+    <h5 class="card-header bg-light text-muted text-capitalize">Sistem Giriş Paneli</h5>
+    <div class="card-body">
+        <div class="col-lg-12 well">
+            <div class="row justify-content-center align-items-center">
+                <form data-ajax="true"
+                      data-ajax-success="LoginOnSuccess"
+                      data-ajax-begin="LoginOnBegin"
+                      data-ajax-complete="LoginOnComplete"
+                      asp-action="GirisYap"
+                      asp-controller="Home"
+                      data-ajax-method="POST">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Email Adresi</label>
+                                    <input type="email" asp-for="Email" placeholder="Email Adresinizi Yazınız.." class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Şifre</label>
+                                    <input type="password" asp-for="Sifre" placeholder="Şifrenizi Yazınız.." class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-info" id="btnGirisYap">Giriş Yap</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        var LoginOnBegin = function () {
+            $("#btnGirisYap").prop("disabled", true);
+            $("#btnGirisYap").html('Lütfen Bekleyin...');
+        };
+        var LoginOnComplete = function () {
+            $("#btnGirisYap").prop("disabled", false);
+            $("#btnGirisYap").html('Giriş Yap');
+        }
+
+        var LoginOnSuccess = function (data) {
+            if (data.Success) {
+                window.location.href = '@Url.Action("Index", "User")';
+                @*toastr.success(data.Message, "Başarılı");*@
+            }
+            else {
+                toastr.error(data.Message, "Doğrulama Hatası!");
+                //swal({
+                //    title: 'HATA',
+                //    text: data.Message,
+                //    type: 'error',
+                //    confirmButtonColor: '#dc3545',
+                //    confirmButtonText: 'Tamam',
+                //});
+            }
+        };
+    </script>
+}
+

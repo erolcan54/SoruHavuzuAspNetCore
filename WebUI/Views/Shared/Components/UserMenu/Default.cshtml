@@ -1,0 +1,52 @@
+﻿@model User
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
+        <a class="navbar-brand" asp-area="" asp-controller="User" asp-action="Index">{ SoruHavuzu }</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Anasayfa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Hakkimizda">Hakkımızda</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Modüller <span class="sr-only">(current)</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-controller="User" asp-action="SoruModul"><i class="fa fa-angle-double-right"></i> Soru Modülü</a>
+                        <a class="dropdown-item" asp-controller="User" asp-action="HavuzModul"><i class="fa fa-angle-double-right"></i> Havuz Modülü</a>
+                        <a class="dropdown-item" asp-controller="User" asp-action="AnketModul"><i class="fa fa-angle-double-right"></i> Anket Modülü</a>
+                        @*<div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Oy Kullandığım Anketler</a>*@
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav float-right">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Mesajlar">
+                        <i class="fa fa-envelope"></i> <span class="badge badge-success">9</span>
+                        <span class="sr-only">unread messages</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i> <span class="sr-only">(current)</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-controller="User" asp-action="Profil">Profil</a>
+                        <a class="dropdown-item" asp-controller="User" asp-action="SifreDegistir">Şifre Değiştir</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" asp-area="" asp-controller="User" asp-action="CikisYap">Çıkış Yap</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,39 @@
+﻿
+
+.btn-primary {
+    color: #fff;
+    background-color: #3f6ad8;
+    border-color: #3f6ad8
+}
+
+.btn {
+    font-size: 0.8rem;
+    font-weight: 500;
+    outline: none !important;
+    position: relative;
+    transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s
+}
+
+
+a {
+    color: #E91E63;
+    text-decoration: none !important;
+    background-color: transparent
+}
+
+.sorulink {
+    color: #333333;
+    text-decoration: none !important;
+    background-color: transparent
+}
+
+    .sorulink:hover {
+        color: black;
+        text-decoration: none !important;
+        background-color: transparent
+    }
+
+.media img {
+    width: 40px;
+    height: auto
+}

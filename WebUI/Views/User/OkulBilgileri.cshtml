@@ -1,0 +1,174 @@
+﻿@model UserDetay
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+
+}
+
+<div class="row mt-5 center-block">
+    <div class="col-md-4">
+        <div class="list-group list-group-flush mb-3">
+            <a asp-action="Profil" class="list-group-item list-group-item-action">Profil</a>
+            <a asp-action="OkulBilgileri" class="list-group-item list-group-item-action active">Okul Bilgileri</a>
+            <a asp-action="SifreDegistir" class="list-group-item list-group-item-action">Şifre Değiştir</a>
+            <a asp-action="HesapAyarlari" class="list-group-item list-group-item-action">Hesap Ayarları</a>
+        </div>
+        <div class="alert alert-info">
+            NOT : Bu bilgiler, soruların istatiksel analizleri amacıyla istenmektedir.
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="col-lg-12 well">
+                    <div class="row justify-content-center align-items-center">
+                        <form data-ajax="true"
+                              data-ajax-success="KayitOlOnSuccess"
+                              data-ajax-begin="OnBegin"
+                              data-ajax-complete="OnComplete"
+                              asp-action="KayitOl"
+                              asp-controller="Home"
+                              data-ajax-method="POST">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-12 form-group">
+                                        <label>İl</label>
+                                        <select asp-for="ilId" id="ilID" class="form-control">
+                                            <option value="0">İl Seçiniz</option>
+                                            @foreach (var i in ViewData["ilListe"] as List<SelectListItem>)
+                                            {
+                                                <option value="@i.Value">@i.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label>İlçe</label>
+                                        <select asp-for="ilceId" id="ilceID" class="form-control">
+                                            <option value="0">İlçe Seçiniz</option>
+                                            @if (Model != null)
+                                            {
+                                                foreach (var i in ViewData["ilceListe"] as List<SelectListItem>)
+                                                {
+                                                    <option value="@i.Value">@i.Text</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label>Okul Adı</label>
+                                        <input type="text" asp-for="OkulAdi" placeholder="Okul Adını Yazınız.." class="form-control">
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label>Kurum Türü</label>
+                                        <select asp-for="KurumTurId" id="KurumTurId" class="form-control">
+                                            <option value="0">Kurum Türü Seçiniz</option>
+                                            @foreach (var i in ViewData["KurumTuruListe"] as List<SelectListItem>)
+                                            {
+                                                <option value="@i.Value">@i.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label>Kurum Tipi</label>
+                                        <select asp-for="KurumTipId" id="KurumTipId" class="form-control">
+                                            <option value="0">Kurum Tipi Seçiniz</option>
+                                            @if (Model != null)
+                                            {
+                                                foreach (var i in ViewData["KurumTipiListe"] as List<SelectListItem>)
+                                                {
+                                                    <option value="@i.Value">@i.Text</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label>Branş</label>
+                                        <select asp-for="BransId" id="BransId" class="form-control">
+                                            <option value="0">Branş Seçiniz</option>
+                                            @if (Model != null)
+                                            {
+                                                foreach (var i in ViewData["BransListe"] as List<SelectListItem>)
+                                                {
+                                                    <option value="@i.Value">@i.Text</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-lg btn-info" id="btnUserDetay">
+                                    @if (Model != null)
+                                    {
+                                        <span>Güncelle</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Ekle</span>
+                                    }
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts{ 
+    <script>
+        $("#ilID").change(function () {
+            var id = $(this).val();
+            var ilceListe = $("#ilceID");
+            ilceListe.empty();
+            ilceListe.append('<option value=0>İlçe Seçiniz</option>');
+            $.ajax({
+                url: '../User/ileGoreilceListele/',
+                type: 'POST',
+                dataType: 'json',
+                data: { 'id': id },
+                success: function (data) {
+                    $.each(data, function (index, option) {
+                        ilceListe.append('<option value=' + option.Value + '>' + option.Text + '</option>');
+                    });
+                }
+            });
+        });
+
+        $("#KurumTurId").change(function () {
+            var id = $(this).val();
+            var KurumTipListe = $("#KurumTipId");
+            KurumTipListe.empty();
+            KurumTipListe.append('<option value=0>Kurum Tipi Seçiniz</option>');
+            $.ajax({
+                url: '../User/KurumTuruneGoreTipListele/',
+                type: 'POST',
+                dataType: 'json',
+                data: { 'id': id },
+                success: function (data) {
+                    $.each(data, function (index, option) {
+                        KurumTipListe.append('<option value=' + option.Value + '>' + option.Text + '</option>');
+                    });
+                }
+            });
+        });
+
+        $("#KurumTurId").change(function () {
+            var id = $(this).val();
+            var BransListe = $("#BransId");
+            BransListe.empty();
+            BransListe.append('<option value=0>Branş Seçiniz</option>');
+            $.ajax({
+                url: '../User/KurumTuruneGoreBransListele/',
+                type: 'POST',
+                dataType: 'json',
+                data: { 'id': id },
+                success: function (data) {
+                    $.each(data, function (index, option) {
+                        BransListe.append('<option value=' + option.Value + '>' + option.Text + '</option>');
+                    });
+                }
+            });
+        });
+    </script>
+}

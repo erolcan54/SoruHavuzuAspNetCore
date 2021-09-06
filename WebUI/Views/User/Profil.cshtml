@@ -1,0 +1,76 @@
+﻿@model User
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<div class="row mt-5 center-block">
+    <div class="col-md-4">
+        <div class="list-group list-group-flush mb-3">
+            <a asp-action="Profil" class="list-group-item list-group-item-action active">Profil</a>
+            <a asp-action="OkulBilgileri" class="list-group-item list-group-item-action">Okul Bilgileri</a>
+            <a asp-action="SifreDegistir" class="list-group-item list-group-item-action">Şifre Değiştir</a>
+            <a asp-action="HesapAyarlari" class="list-group-item list-group-item-action">Hesap Ayarları</a>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="col-lg-12 well">
+                    <div class="row justify-content-center align-items-center">
+                        <form>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-12 form-group">
+                                        <label>Ad</label>
+                                        <input type="text"asp-for="Ad" placeholder="Adınızı Yazınız.." class="form-control" disabled>
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label>Soyad</label>
+                                        <input type="text" asp-for="Soyad" placeholder="Soyadınızı Yazınız.." class="form-control" disabled>
+                                    </div>
+                                </div>
+                                @*<div class="form-group">
+                                        <label>Address</label>
+                                        <textarea placeholder="Enter Address Here.." rows="3" class="form-control"></textarea>
+                                    </div>*@
+                                @*<div class="row">
+                                        <div class="col-sm-4 form-group">
+                                            <label>City</label>
+                                            <input type="text" placeholder="Enter City Name Here.." class="form-control">
+                                        </div>
+                                        <div class="col-sm-4 form-group">
+                                            <label>State</label>
+                                            <input type="text" placeholder="Enter State Name Here.." class="form-control">
+                                        </div>
+                                        <div class="col-sm-4 form-group">
+                                            <label>Zip</label>
+                                            <input type="text" placeholder="Enter Zip Code Here.." class="form-control">
+                                        </div>
+                                    </div>*@
+                                @*<div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            <label>Title</label>
+                                            <input type="text" placeholder="Enter Designation Here.." class="form-control">
+                                        </div>
+                                        <div class="col-sm-6 form-group">
+                                            <label>Company</label>
+                                            <input type="text" placeholder="Enter Company Name Here.." class="form-control">
+                                        </div>
+                                    </div>*@
+                                @*<div class="form-group">
+                                        <label>Phone Number</label>
+                                        <input type="text" placeholder="Enter Phone Number Here.." class="form-control">
+                                    </div>*@
+                                <div class="form-group">
+                                    <label>Email Adresi</label>
+                                    <input type="email" asp-for="Email" placeholder="Email Adresinizi Yazınız.." class="form-control" disabled>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
